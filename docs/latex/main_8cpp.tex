@@ -38,6 +38,20 @@ void \mbox{\hyperlink{main_8cpp_a22c708660ca240d82a93c9ab590d4410}{append\+File}
 \begin{DoxyCompactList}\small\item\em appends a file \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{main_8cpp_aaa64f44514c33d09845d1a61cfca3a27}{handle\+Download}} (Async\+Web\+Server\+Request \texorpdfstring{$\ast$}{*}request)
 \begin{DoxyCompactList}\small\item\em handles the download of the data.\+csv file \end{DoxyCompactList}\item 
+String \mbox{\hyperlink{main_8cpp_a85ab8b6b61df960d00da9593c198bf76}{get\+Sensor\+Readings}} ()
+\begin{DoxyCompactList}\small\item\em gets the sensor readings \end{DoxyCompactList}\item 
+\Hypertarget{main_8cpp_a12b97dd15b0118cb30b85286f7c4b3c9}\label{main_8cpp_a12b97dd15b0118cb30b85286f7c4b3c9} 
+Async\+Web\+Socket {\bfseries ws} ("{}/ws"{})
+\begin{DoxyCompactList}\small\item\em Create a Web\+Socket object. \end{DoxyCompactList}\item 
+\Hypertarget{main_8cpp_ae01d34a84a6a91e3191a49e3cb36b1cf}\label{main_8cpp_ae01d34a84a6a91e3191a49e3cb36b1cf} 
+void {\bfseries notify\+Clients} (String sensor\+Readings)
+\begin{DoxyCompactList}\small\item\em Notify clients about new sensor readings. \end{DoxyCompactList}\item 
+\Hypertarget{main_8cpp_a0be75b75b82f96e18d5c695059a67a63}\label{main_8cpp_a0be75b75b82f96e18d5c695059a67a63} 
+void {\bfseries handle\+Web\+Socket\+Message} (void \texorpdfstring{$\ast$}{*}arg, uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, size\+\_\+t len)
+\item 
+\Hypertarget{main_8cpp_ad296f25594d8ca4d02d0025819437b7b}\label{main_8cpp_ad296f25594d8ca4d02d0025819437b7b} 
+void {\bfseries on\+Event} (Async\+Web\+Socket \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{main_8cpp_a85f30d66aa1231313c8553fd485b22b1}{server}}, Async\+Web\+Socket\+Client \texorpdfstring{$\ast$}{*}client, Aws\+Event\+Type type, void \texorpdfstring{$\ast$}{*}arg, uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, size\+\_\+t len)
+\item 
 \Hypertarget{main_8cpp_a88e5d548d87de5bf811e50e939140823}\label{main_8cpp_a88e5d548d87de5bf811e50e939140823} 
 NTPClient {\bfseries time\+Client} (\mbox{\hyperlink{main_8cpp_a22f33e7e05df58bb6145bb6e543e232a}{ntp\+UDP}})
 \item 
@@ -48,6 +62,9 @@ void \mbox{\hyperlink{main_8cpp_a316f8f0c50a737823d2db28cf007be76}{initialize\+S
 \Hypertarget{main_8cpp_a85f30d66aa1231313c8553fd485b22b1}\label{main_8cpp_a85f30d66aa1231313c8553fd485b22b1} 
 Async\+Web\+Server {\bfseries server} (80)
 \begin{DoxyCompactList}\small\item\em initializes the web server \end{DoxyCompactList}\item 
+\Hypertarget{main_8cpp_ad2333f25c6f394c305cbe53136efd8b3}\label{main_8cpp_ad2333f25c6f394c305cbe53136efd8b3} 
+void {\bfseries init\+Web\+Socket} ()
+\begin{DoxyCompactList}\small\item\em initializes the web socket \end{DoxyCompactList}\item 
 \Hypertarget{main_8cpp_a04cb710c04c32d1afcdd2268bdcc20d9}\label{main_8cpp_a04cb710c04c32d1afcdd2268bdcc20d9} 
 IPAddress {\bfseries subnet} (255, 255, 0, 0)
 \item 
@@ -57,8 +74,6 @@ Async\+Event\+Source {\bfseries events} ("{}/events"{})
 \Hypertarget{main_8cpp_a04fa29a714fc5172d698d92d1e6663ca}\label{main_8cpp_a04fa29a714fc5172d698d92d1e6663ca} 
 One\+Wire {\bfseries one\+Wire} (\mbox{\hyperlink{main_8cpp_a20cd826a70610a045e9118e9d7970275}{one\+Wire\+Bus}})
 \begin{DoxyCompactList}\small\item\em Setup a one\+Wire instance to communicate with One\+Wire devices (DS18\+B20) \end{DoxyCompactList}\item 
-String \mbox{\hyperlink{main_8cpp_a85ab8b6b61df960d00da9593c198bf76}{get\+Sensor\+Readings}} ()
-\begin{DoxyCompactList}\small\item\em gets the sensor readings \end{DoxyCompactList}\item 
 \Hypertarget{main_8cpp_a2bd24b36ef8125b5b50e866ffdf9c805}\label{main_8cpp_a2bd24b36ef8125b5b50e866ffdf9c805} 
 void {\bfseries init\+SPIFFS} ()
 \begin{DoxyCompactList}\small\item\em initializes the SPIFFS \end{DoxyCompactList}\item 
@@ -68,7 +83,8 @@ bool \mbox{\hyperlink{main_8cpp_ae3cd6362ffeb905d21037483b851e723}{init\+Wi\+Fi}
 \begin{DoxyCompactList}\small\item\em initializes the Wi-\/\+Fi connection \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}{setup}} ()
 \item 
-void \mbox{\hyperlink{main_8cpp_afe461d27b9c48d5921c00d521181f12f}{loop}} ()
+\Hypertarget{main_8cpp_afe461d27b9c48d5921c00d521181f12f}\label{main_8cpp_afe461d27b9c48d5921c00d521181f12f} 
+void {\bfseries loop} ()
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
@@ -216,7 +232,7 @@ String with the sensor readings in json format
 
 sets the date and time variables from the NTPClient for the data.\+csv file 
 
-The formatted\+Date comes with the following format\+: 2018-\/05-\/28T16\+:00\+:13Z We need to extract date and time
+The formatted\+Date comes with the following format\+: 2018-\/05-\/28T16\+:00\+:13Z
 
 Extract date
 
@@ -259,7 +275,7 @@ If the data.\+txt file doesn\textquotesingle{}t exist Create a file on the SD ca
 
 initializes the NTPClient 
 
-Initialize a NTPClient to get time
+Initialize a NTPClient to get time data
 
 GMT +1 = 3600\Hypertarget{main_8cpp_ae3cd6362ffeb905d21037483b851e723}\label{main_8cpp_ae3cd6362ffeb905d21037483b851e723} 
 \index{main.cpp@{main.cpp}!initWiFi@{initWiFi}}
@@ -276,13 +292,7 @@ true if Wi-\/\+Fi connection is successful
 
 false if Wi-\/\+Fi connection is unsuccessful 
 \end{DoxyReturn}
-\Hypertarget{main_8cpp_afe461d27b9c48d5921c00d521181f12f}\label{main_8cpp_afe461d27b9c48d5921c00d521181f12f} 
-\index{main.cpp@{main.cpp}!loop@{loop}}
-\index{loop@{loop}!main.cpp@{main.cpp}}
-\doxysubsubsection{\texorpdfstring{loop()}{loop()}}
-{\footnotesize\ttfamily void loop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-Send Events to the client with the Sensor Readings Every 10 seconds\Hypertarget{main_8cpp_a62f397dc6088ac03f320312b0d95b5a7}\label{main_8cpp_a62f397dc6088ac03f320312b0d95b5a7} 
+\Hypertarget{main_8cpp_a62f397dc6088ac03f320312b0d95b5a7}\label{main_8cpp_a62f397dc6088ac03f320312b0d95b5a7} 
 \index{main.cpp@{main.cpp}!readFile@{readFile}}
 \index{readFile@{readFile}!main.cpp@{main.cpp}}
 \doxysubsubsection{\texorpdfstring{readFile()}{readFile()}}
@@ -314,11 +324,9 @@ Load values saved in SPIFFS
 
 Web Server Root URL
 
-Request for the latest sensor readings
-
-send event with message "{}hello!"{}, id current millis and set reconnect delay to 1 second
-
 Start server
+
+Start DS18\+B20 sensors
 
 Connect to Wi-\/\+Fi network with SSID and password
 
@@ -340,9 +348,7 @@ Write file to save value
 
 HTTP POST gateway value
 
-Write file to save value
-
-Serial.\+printf("{}\+POST\mbox{[}\%s\mbox{]}\+: \%s\textbackslash{}n"{}, p-\/\texorpdfstring{$>$}{>}name().c\+\_\+str(), p-\/\texorpdfstring{$>$}{>}value().c\+\_\+str());\Hypertarget{main_8cpp_adfdfe491c3b951586aeba25a0b8ccf80}\label{main_8cpp_adfdfe491c3b951586aeba25a0b8ccf80} 
+Write file to save value\Hypertarget{main_8cpp_adfdfe491c3b951586aeba25a0b8ccf80}\label{main_8cpp_adfdfe491c3b951586aeba25a0b8ccf80} 
 \index{main.cpp@{main.cpp}!writeFile@{writeFile}}
 \index{writeFile@{writeFile}!main.cpp@{main.cpp}}
 \doxysubsubsection{\texorpdfstring{writeFile()}{writeFile()}}

@@ -41,12 +41,51 @@ void getTimeStamp();
 void logSDCard();
 void appendFile(fs::FS &fs, const char *path, const char *message);
 void handleDownload(AsyncWebServerRequest *request);
+String getSensorReadings();
 
 /// Define CS pin for the SD card module
 #define SD_CS 5
 
+/// Create a WebSocket object
+AsyncWebSocket ws("/ws");
+
 /// Save reading number on RTC memory
 RTC_DATA_ATTR int readingID = 0;
+
+/// Notify clients about new sensor readings
+void notifyClients(String sensorReadings)
+{
+  ws.textAll(sensorReadings);
+}
+
+void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
+{
+  AwsFrameInfo *info = (AwsFrameInfo *)arg;
+  if (info->final && info->index == 0 && info->len == len && info->opcode == WS_TEXT)
+  {
+    String sensorReadings = getSensorReadings();
+    notifyClients(sensorReadings);
+  }
+}
+
+void onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventType type, void *arg, uint8_t *data, size_t len)
+{
+  switch (type)
+  {
+  case WS_EVT_CONNECT:
+    Serial.printf("WebSocket client #%u connected from %s\n", client->id(), client->remoteIP().toString().c_str());
+    break;
+  case WS_EVT_DISCONNECT:
+    Serial.printf("WebSocket client #%u disconnected\n", client->id());
+    break;
+  case WS_EVT_DATA:
+    handleWebSocketMessage(arg, data, len);
+    break;
+  case WS_EVT_PONG:
+  case WS_EVT_ERROR:
+    break;
+  }
+}
 
 String dataMessage;
 
@@ -69,7 +108,7 @@ String timeStamp;
  */
 void initializeTimeClient()
 {
-  /// Initialize a NTPClient to get time
+  /// Initialize a NTPClient to get time data
   timeClient.begin();
 
   /// GMT +1 = 3600
@@ -158,7 +197,6 @@ void getTimeStamp()
   }
   /// The formattedDate comes with the following format:
   /// 2018-05-28T16:00:13Z
-  /// We need to extract date and time
   formattedDate = timeClient.getFormattedDate();
   Serial.println(formattedDate);
 
@@ -166,6 +204,7 @@ void getTimeStamp()
   int splitT = formattedDate.indexOf("T");
   dayStamp = formattedDate.substring(0, splitT);
   Serial.println(dayStamp);
+
   /// Extract time
   timeStamp = formattedDate.substring(splitT + 1, formattedDate.length() - 1);
   Serial.println(timeStamp);
@@ -217,6 +256,16 @@ void appendFile(fs::FS &fs, const char *path, const char *message)
  *
  */
 AsyncWebServer server(80);
+
+/**
+ * @brief initializes the web socket
+ *
+ */
+void initWebSocket()
+{
+  ws.onEvent(onEvent);
+  server.addHandler(&ws);
+}
 
 /// Search for parameter in HTTP POST request
 const char *PARAM_INPUT_1 = "ssid";
@@ -418,31 +467,18 @@ void setup()
 
     server.serveStatic("/", SPIFFS, "/");
 
-    /// Request for the latest sensor readings
-    server.on("/readings", HTTP_GET, [](AsyncWebServerRequest *request)
-              {
-    String json = getSensorReadings();
-    request->send(200, "application/json", json);
-    json = String(); });
-
     server.on("/download", HTTP_GET, handleDownload);
-
-    events.onConnect([](AsyncEventSourceClient *client)
-                     {
-    if(client->lastId()){
-      Serial.printf("Client reconnected! Last message ID that it got is: %u\n", client->lastId());
-    }
-    /// send event with message "hello!", id current millis
-    /// and set reconnect delay to 1 second
-    client->send("hello!", NULL, millis(), 10000); });
-    server.addHandler(&events);
 
     /// Start server
     server.begin();
 
     initializeTimeClient();
     initializeSDCard();
+
+    /// Start DS18B20 sensors
     sensors.begin();
+
+    initWebSocket();
   }
   else
   {
@@ -499,7 +535,6 @@ void setup()
             /// Write file to save value
             writeFile(SPIFFS, gatewayPath, gateway.c_str());
           }
-          ///Serial.printf("POST[%s]: %s\n", p->name().c_str(), p->value().c_str());
         }
       }
       request->send(200, "text/plain", "Done. ESP will restart, connect to your router and go to IP address: " + ip);
@@ -514,16 +549,15 @@ void loop()
   if (initWifi && (millis() - lastTime) > timerDelay)
   {
     String sensorReadings = getSensorReadings();
-    /// Send Events to the client with the Sensor Readings Every 10 seconds
-    events.send("ping", NULL, millis());
-    events.send(sensorReadings.c_str(), "new_readings", millis());
+
     lastTime = millis();
+
     Serial.print("Sending Sensor Readings: ");
     Serial.println(sensorReadings);
 
+    notifyClients(sensorReadings);
+
     getTimeStamp();
     logSDCard();
-
-    readingID++;
   }
 }

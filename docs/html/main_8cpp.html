@@ -124,6 +124,23 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>logSDCard</b> ()</td>
 <tr class="memitem:aaa64f44514c33d09845d1a61cfca3a27" id="r_aaa64f44514c33d09845d1a61cfca3a27"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaa64f44514c33d09845d1a61cfca3a27">handleDownload</a> (AsyncWebServerRequest *request)</td></tr>
 <tr class="memdesc:aaa64f44514c33d09845d1a61cfca3a27"><td class="mdescLeft">&#160;</td><td class="mdescRight">handles the download of the data.csv file  <br /></td></tr>
 <tr class="separator:aaa64f44514c33d09845d1a61cfca3a27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85ab8b6b61df960d00da9593c198bf76" id="r_a85ab8b6b61df960d00da9593c198bf76"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a85ab8b6b61df960d00da9593c198bf76">getSensorReadings</a> ()</td></tr>
+<tr class="memdesc:a85ab8b6b61df960d00da9593c198bf76"><td class="mdescLeft">&#160;</td><td class="mdescRight">gets the sensor readings  <br /></td></tr>
+<tr class="separator:a85ab8b6b61df960d00da9593c198bf76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12b97dd15b0118cb30b85286f7c4b3c9" id="r_a12b97dd15b0118cb30b85286f7c4b3c9"><td class="memItemLeft" align="right" valign="top"><a id="a12b97dd15b0118cb30b85286f7c4b3c9" name="a12b97dd15b0118cb30b85286f7c4b3c9"></a>
+AsyncWebSocket&#160;</td><td class="memItemRight" valign="bottom"><b>ws</b> (&quot;/ws&quot;)</td></tr>
+<tr class="memdesc:a12b97dd15b0118cb30b85286f7c4b3c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a WebSocket object. <br /></td></tr>
+<tr class="separator:a12b97dd15b0118cb30b85286f7c4b3c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae01d34a84a6a91e3191a49e3cb36b1cf" id="r_ae01d34a84a6a91e3191a49e3cb36b1cf"><td class="memItemLeft" align="right" valign="top"><a id="ae01d34a84a6a91e3191a49e3cb36b1cf" name="ae01d34a84a6a91e3191a49e3cb36b1cf"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>notifyClients</b> (String sensorReadings)</td></tr>
+<tr class="memdesc:ae01d34a84a6a91e3191a49e3cb36b1cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notify clients about new sensor readings. <br /></td></tr>
+<tr class="separator:ae01d34a84a6a91e3191a49e3cb36b1cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0be75b75b82f96e18d5c695059a67a63" id="r_a0be75b75b82f96e18d5c695059a67a63"><td class="memItemLeft" align="right" valign="top"><a id="a0be75b75b82f96e18d5c695059a67a63" name="a0be75b75b82f96e18d5c695059a67a63"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>handleWebSocketMessage</b> (void *arg, uint8_t *data, size_t len)</td></tr>
+<tr class="separator:a0be75b75b82f96e18d5c695059a67a63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad296f25594d8ca4d02d0025819437b7b" id="r_ad296f25594d8ca4d02d0025819437b7b"><td class="memItemLeft" align="right" valign="top"><a id="ad296f25594d8ca4d02d0025819437b7b" name="ad296f25594d8ca4d02d0025819437b7b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>onEvent</b> (AsyncWebSocket *<a class="el" href="#a85f30d66aa1231313c8553fd485b22b1">server</a>, AsyncWebSocketClient *client, AwsEventType type, void *arg, uint8_t *data, size_t len)</td></tr>
+<tr class="separator:ad296f25594d8ca4d02d0025819437b7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a88e5d548d87de5bf811e50e939140823" id="r_a88e5d548d87de5bf811e50e939140823"><td class="memItemLeft" align="right" valign="top"><a id="a88e5d548d87de5bf811e50e939140823" name="a88e5d548d87de5bf811e50e939140823"></a>
 NTPClient&#160;</td><td class="memItemRight" valign="bottom"><b>timeClient</b> (<a class="el" href="#a22f33e7e05df58bb6145bb6e543e232a">ntpUDP</a>)</td></tr>
 <tr class="separator:a88e5d548d87de5bf811e50e939140823"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -137,6 +154,10 @@ NTPClient&#160;</td><td class="memItemRight" valign="bottom"><b>timeClient</b> (
 AsyncWebServer&#160;</td><td class="memItemRight" valign="bottom"><b>server</b> (80)</td></tr>
 <tr class="memdesc:a85f30d66aa1231313c8553fd485b22b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">initializes the web server <br /></td></tr>
 <tr class="separator:a85f30d66aa1231313c8553fd485b22b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2333f25c6f394c305cbe53136efd8b3" id="r_ad2333f25c6f394c305cbe53136efd8b3"><td class="memItemLeft" align="right" valign="top"><a id="ad2333f25c6f394c305cbe53136efd8b3" name="ad2333f25c6f394c305cbe53136efd8b3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>initWebSocket</b> ()</td></tr>
+<tr class="memdesc:ad2333f25c6f394c305cbe53136efd8b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">initializes the web socket <br /></td></tr>
+<tr class="separator:ad2333f25c6f394c305cbe53136efd8b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04cb710c04c32d1afcdd2268bdcc20d9" id="r_a04cb710c04c32d1afcdd2268bdcc20d9"><td class="memItemLeft" align="right" valign="top"><a id="a04cb710c04c32d1afcdd2268bdcc20d9" name="a04cb710c04c32d1afcdd2268bdcc20d9"></a>
 IPAddress&#160;</td><td class="memItemRight" valign="bottom"><b>subnet</b> (255, 255, 0, 0)</td></tr>
 <tr class="separator:a04cb710c04c32d1afcdd2268bdcc20d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -148,9 +169,6 @@ AsyncEventSource&#160;</td><td class="memItemRight" valign="bottom"><b>events</b
 OneWire&#160;</td><td class="memItemRight" valign="bottom"><b>oneWire</b> (<a class="el" href="#a20cd826a70610a045e9118e9d7970275">oneWireBus</a>)</td></tr>
 <tr class="memdesc:a04fa29a714fc5172d698d92d1e6663ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup a oneWire instance to communicate with OneWire devices (DS18B20) <br /></td></tr>
 <tr class="separator:a04fa29a714fc5172d698d92d1e6663ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a85ab8b6b61df960d00da9593c198bf76" id="r_a85ab8b6b61df960d00da9593c198bf76"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a85ab8b6b61df960d00da9593c198bf76">getSensorReadings</a> ()</td></tr>
-<tr class="memdesc:a85ab8b6b61df960d00da9593c198bf76"><td class="mdescLeft">&#160;</td><td class="mdescRight">gets the sensor readings  <br /></td></tr>
-<tr class="separator:a85ab8b6b61df960d00da9593c198bf76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2bd24b36ef8125b5b50e866ffdf9c805" id="r_a2bd24b36ef8125b5b50e866ffdf9c805"><td class="memItemLeft" align="right" valign="top"><a id="a2bd24b36ef8125b5b50e866ffdf9c805" name="a2bd24b36ef8125b5b50e866ffdf9c805"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>initSPIFFS</b> ()</td></tr>
 <tr class="memdesc:a2bd24b36ef8125b5b50e866ffdf9c805"><td class="mdescLeft">&#160;</td><td class="mdescRight">initializes the SPIFFS <br /></td></tr>
@@ -163,7 +181,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>initSPIFFS</b> ()</td
 <tr class="separator:ae3cd6362ffeb905d21037483b851e723"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fc01d736fe50cf5b977f755b675f11d" id="r_a4fc01d736fe50cf5b977f755b675f11d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4fc01d736fe50cf5b977f755b675f11d">setup</a> ()</td></tr>
 <tr class="separator:a4fc01d736fe50cf5b977f755b675f11d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe461d27b9c48d5921c00d521181f12f" id="r_afe461d27b9c48d5921c00d521181f12f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afe461d27b9c48d5921c00d521181f12f">loop</a> ()</td></tr>
+<tr class="memitem:afe461d27b9c48d5921c00d521181f12f" id="r_afe461d27b9c48d5921c00d521181f12f"><td class="memItemLeft" align="right" valign="top"><a id="afe461d27b9c48d5921c00d521181f12f" name="afe461d27b9c48d5921c00d521181f12f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>loop</b> ()</td></tr>
 <tr class="separator:afe461d27b9c48d5921c00d521181f12f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
@@ -350,7 +369,7 @@ DallasTemperature sensors &amp;&#160;</td><td class="memItemRight" valign="botto
 </div><div class="memdoc">
 
 <p>sets the date and time variables from the NTPClient for the data.csv file </p>
-<p>The formattedDate comes with the following format: 2018-05-28T16:00:13Z We need to extract date and time</p>
+<p>The formattedDate comes with the following format: 2018-05-28T16:00:13Z</p>
 <p>Extract date</p>
 <p>Extract time</p>
 
@@ -420,7 +439,7 @@ DallasTemperature sensors &amp;&#160;</td><td class="memItemRight" valign="botto
 </div><div class="memdoc">
 
 <p>initializes the NTPClient </p>
-<p>Initialize a NTPClient to get time</p>
+<p>Initialize a NTPClient to get time data</p>
 <p>GMT +1 = 3600</p>
 
 </div>
@@ -444,24 +463,6 @@ DallasTemperature sensors &amp;&#160;</td><td class="memItemRight" valign="botto
 <dl class="section return"><dt>Returns</dt><dd>true if Wi-Fi connection is successful </dd>
 <dd>
 false if Wi-Fi connection is unsuccessful </dd></dl>
-
-</div>
-</div>
-<a id="afe461d27b9c48d5921c00d521181f12f" name="afe461d27b9c48d5921c00d521181f12f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe461d27b9c48d5921c00d521181f12f">&#9670;&#160;</a></span>loop()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void loop </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Send Events to the client with the Sensor Readings Every 10 seconds</p>
 
 </div>
 </div>
@@ -513,9 +514,8 @@ false if Wi-Fi connection is unsuccessful </dd></dl>
 <p>Serial port for debugging purposes</p>
 <p>Load values saved in SPIFFS</p>
 <p>Web Server Root URL</p>
-<p>Request for the latest sensor readings</p>
-<p>send event with message "hello!", id current millis and set reconnect delay to 1 second</p>
 <p>Start server</p>
+<p>Start DS18B20 sensors</p>
 <p>Connect to Wi-Fi network with SSID and password</p>
 <p>NULL sets an open Access Point</p>
 <p>Web Server Root URL</p>
@@ -527,7 +527,6 @@ false if Wi-Fi connection is unsuccessful </dd></dl>
 <p>Write file to save value</p>
 <p>HTTP POST gateway value</p>
 <p>Write file to save value</p>
-<p>Serial.printf("POST[%s]: %s\n", p-&gt;name().c_str(), p-&gt;value().c_str());</p>
 
 </div>
 </div>

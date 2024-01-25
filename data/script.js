@@ -3,6 +3,9 @@
 // Get current sensor readings when the page loads
 window.addEventListener('load', getReadings);
 
+var gateway = `ws://${window.location.hostname}/ws`;
+var websocket;
+
 // Create Temperature Chart
 var chartT = new Highcharts.Chart({
     chart: {
@@ -37,6 +40,25 @@ var chartT = new Highcharts.Chart({
     }
 });
 
+// Init web socket when the page loads
+window.addEventListener('load', onload);
+
+function onload(event) {
+    initWebSocket();
+}
+
+function getReadings() {
+    websocket.send("getReadings");
+}
+
+function initWebSocket() {
+    console.log('Trying to open a WebSocket connection…');
+    websocket = new WebSocket(gateway);
+    websocket.onopen = onOpen;
+    websocket.onclose = onClose;
+    websocket.onmessage = onMessage;
+}
+
 
 //Plot temperature in the temperature chart
 function plotTemperature(jsonValue) {
@@ -61,43 +83,24 @@ function plotTemperature(jsonValue) {
     }
 }
 
-// Function to get current readings on the webpage when it loads for the first time
-function getReadings() {
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            var myObj = JSON.parse(this.responseText);
-            console.log(myObj);
-            plotTemperature(myObj);
-        }
-    };
-    xhr.open("GET", "/readings", true);
-    xhr.send();
+// When websocket is established, call the getReadings() function
+function onOpen(event) {
+    console.log('Connection opened');
+    getReadings();
 }
 
-if (!!window.EventSource) {
-    var source = new EventSource('/events');
+function onClose(event) {
+    console.log('Connection closed');
+    setTimeout(initWebSocket, 2000);
+}
 
-    source.addEventListener('open', function (e) {
-        console.log("Events Connected");
-    }, false);
-
-    source.addEventListener('error', function (e) {
-        if (e.target.readyState != EventSource.OPEN) {
-            console.log("Events Disconnected");
-        }
-    }, false);
-
-    source.addEventListener('message', function (e) {
-        console.log("message", e.data);
-    }, false);
-
-    source.addEventListener('new_readings', function (e) {
-        console.log("new_readings", e.data);
-        var myObj = JSON.parse(e.data);
-        console.log(myObj);
-        plotTemperature(myObj);
-    }, false);
+// Function that receives the message from the ESP32 with the readings
+function onMessage(event) {
+    var data = event.data;
+    console.log(data);
+    var dataObj = JSON.parse(data);
+    console.log(dataObj);
+    plotTemperature(dataObj);
 }
 
 
