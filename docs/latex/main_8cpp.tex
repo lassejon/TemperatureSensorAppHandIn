@@ -1,0 +1,367 @@
+\doxysection{src/main.cpp File Reference}
+\hypertarget{main_8cpp}{}\label{main_8cpp}\index{src/main.cpp@{src/main.cpp}}
+
+
+Main entry point for the application.  
+
+
+{\ttfamily \#include $<$Arduino.\+h$>$}\newline
+{\ttfamily \#include $<$ESPAsync\+Web\+Server.\+h$>$}\newline
+{\ttfamily \#include $<$Async\+TCP.\+h$>$}\newline
+{\ttfamily \#include "{}SPIFFS.\+h"{}}\newline
+{\ttfamily \#include "{}FS.\+h"{}}\newline
+{\ttfamily \#include "{}SD.\+h"{}}\newline
+{\ttfamily \#include $<$SPI.\+h$>$}\newline
+{\ttfamily \#include $<$Arduino\+\_\+\+JSON.\+h$>$}\newline
+{\ttfamily \#include $<$One\+Wire.\+h$>$}\newline
+{\ttfamily \#include $<$Dallas\+Temperature.\+h$>$}\newline
+{\ttfamily \#include $<$Wi\+Fi.\+h$>$}\newline
+{\ttfamily \#include $<$NTPClient.\+h$>$}\newline
+{\ttfamily \#include $<$Wi\+Fi\+Udp.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{main_8cpp_a7e2d8ef8f0724f23ce84b1e7d0c171d9}\label{main_8cpp_a7e2d8ef8f0724f23ce84b1e7d0c171d9} 
+\#define {\bfseries SD\+\_\+\+CS}~5
+\begin{DoxyCompactList}\small\item\em Define CS pin for the SD card module. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{main_8cpp_adfdfe491c3b951586aeba25a0b8ccf80}{write\+File}} (fs\+::\+FS \&fs, const char \texorpdfstring{$\ast$}{*}path, const char \texorpdfstring{$\ast$}{*}message)
+\begin{DoxyCompactList}\small\item\em SPIFFS (SPI Flash File System) allows you to access the flash memory like you would do in a normal filesystem in your computer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a8c42102313651a66a4bf03ef1157398b}{get\+Time\+Stamp}} ()
+\begin{DoxyCompactList}\small\item\em sets the date and time variables from the NTPClient for the data.\+csv file \end{DoxyCompactList}\item 
+\Hypertarget{main_8cpp_a9b84465ba13d1ffbbd8984454b314f52}\label{main_8cpp_a9b84465ba13d1ffbbd8984454b314f52} 
+void {\bfseries log\+SDCard} ()
+\begin{DoxyCompactList}\small\item\em logs the data to the data.\+csv file on the SD card \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a22c708660ca240d82a93c9ab590d4410}{append\+File}} (fs\+::\+FS \&fs, const char \texorpdfstring{$\ast$}{*}path, const char \texorpdfstring{$\ast$}{*}message)
+\begin{DoxyCompactList}\small\item\em appends a file \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_aaa64f44514c33d09845d1a61cfca3a27}{handle\+Download}} (Async\+Web\+Server\+Request \texorpdfstring{$\ast$}{*}request)
+\begin{DoxyCompactList}\small\item\em handles the download of the data.\+csv file \end{DoxyCompactList}\item 
+\Hypertarget{main_8cpp_a88e5d548d87de5bf811e50e939140823}\label{main_8cpp_a88e5d548d87de5bf811e50e939140823} 
+NTPClient {\bfseries time\+Client} (\mbox{\hyperlink{main_8cpp_a22f33e7e05df58bb6145bb6e543e232a}{ntp\+UDP}})
+\item 
+void \mbox{\hyperlink{main_8cpp_a0e21e745f7111637149a98f1de4c8fdb}{initialize\+Time\+Client}} ()
+\begin{DoxyCompactList}\small\item\em initializes the NTPClient \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a316f8f0c50a737823d2db28cf007be76}{initialize\+SDCard}} ()
+\begin{DoxyCompactList}\small\item\em initializes the SD card \end{DoxyCompactList}\item 
+\Hypertarget{main_8cpp_a85f30d66aa1231313c8553fd485b22b1}\label{main_8cpp_a85f30d66aa1231313c8553fd485b22b1} 
+Async\+Web\+Server {\bfseries server} (80)
+\begin{DoxyCompactList}\small\item\em initializes the web server \end{DoxyCompactList}\item 
+\Hypertarget{main_8cpp_a04cb710c04c32d1afcdd2268bdcc20d9}\label{main_8cpp_a04cb710c04c32d1afcdd2268bdcc20d9} 
+IPAddress {\bfseries subnet} (255, 255, 0, 0)
+\item 
+\Hypertarget{main_8cpp_ac629f93fbb9f92b2bd04e9d3f1c6ce38}\label{main_8cpp_ac629f93fbb9f92b2bd04e9d3f1c6ce38} 
+Async\+Event\+Source {\bfseries events} ("{}/events"{})
+\begin{DoxyCompactList}\small\item\em Create an Event Source on /events. \end{DoxyCompactList}\item 
+\Hypertarget{main_8cpp_a04fa29a714fc5172d698d92d1e6663ca}\label{main_8cpp_a04fa29a714fc5172d698d92d1e6663ca} 
+One\+Wire {\bfseries one\+Wire} (\mbox{\hyperlink{main_8cpp_a20cd826a70610a045e9118e9d7970275}{one\+Wire\+Bus}})
+\begin{DoxyCompactList}\small\item\em Setup a one\+Wire instance to communicate with One\+Wire devices (DS18\+B20) \end{DoxyCompactList}\item 
+String \mbox{\hyperlink{main_8cpp_a85ab8b6b61df960d00da9593c198bf76}{get\+Sensor\+Readings}} ()
+\begin{DoxyCompactList}\small\item\em gets the sensor readings \end{DoxyCompactList}\item 
+\Hypertarget{main_8cpp_a2bd24b36ef8125b5b50e866ffdf9c805}\label{main_8cpp_a2bd24b36ef8125b5b50e866ffdf9c805} 
+void {\bfseries init\+SPIFFS} ()
+\begin{DoxyCompactList}\small\item\em initializes the SPIFFS \end{DoxyCompactList}\item 
+String \mbox{\hyperlink{main_8cpp_a62f397dc6088ac03f320312b0d95b5a7}{read\+File}} (fs\+::\+FS \&fs, const char \texorpdfstring{$\ast$}{*}path)
+\begin{DoxyCompactList}\small\item\em reads a file from SPIFFS \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{main_8cpp_ae3cd6362ffeb905d21037483b851e723}{init\+Wi\+Fi}} ()
+\begin{DoxyCompactList}\small\item\em initializes the Wi-\/\+Fi connection \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}{setup}} ()
+\item 
+void \mbox{\hyperlink{main_8cpp_afe461d27b9c48d5921c00d521181f12f}{loop}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{main_8cpp_a29fa5ca95856a446faaf631b187ec596}\label{main_8cpp_a29fa5ca95856a446faaf631b187ec596} 
+RTC\+\_\+\+DATA\+\_\+\+ATTR int {\bfseries reading\+ID} = 0
+\begin{DoxyCompactList}\small\item\em Save reading number on RTC memory. \end{DoxyCompactList}\item 
+\Hypertarget{main_8cpp_a8d6e69693cc824bcb0c95766c8a13e83}\label{main_8cpp_a8d6e69693cc824bcb0c95766c8a13e83} 
+String {\bfseries data\+Message}
+\item 
+\Hypertarget{main_8cpp_afc1d28cfbce795d6ea954ebe725241f5}\label{main_8cpp_afc1d28cfbce795d6ea954ebe725241f5} 
+float {\bfseries temperature}
+\begin{DoxyCompactList}\small\item\em Temperature Sensor variables. \end{DoxyCompactList}\item 
+\Hypertarget{main_8cpp_a58aa2e2bc07417032a83d834b0e1065a}\label{main_8cpp_a58aa2e2bc07417032a83d834b0e1065a} 
+bool {\bfseries init\+Wifi} = false
+\item 
+\Hypertarget{main_8cpp_a22f33e7e05df58bb6145bb6e543e232a}\label{main_8cpp_a22f33e7e05df58bb6145bb6e543e232a} 
+Wi\+Fi\+UDP {\bfseries ntp\+UDP}
+\begin{DoxyCompactList}\small\item\em Define NTP Client to get time. \end{DoxyCompactList}\item 
+\Hypertarget{main_8cpp_aa3d4af477910310a754f78f753169ae8}\label{main_8cpp_aa3d4af477910310a754f78f753169ae8} 
+String {\bfseries formatted\+Date}
+\begin{DoxyCompactList}\small\item\em Variables to save date and time. \end{DoxyCompactList}\item 
+\Hypertarget{main_8cpp_a16d11ae2a7b09076e335115cf450849f}\label{main_8cpp_a16d11ae2a7b09076e335115cf450849f} 
+String {\bfseries day\+Stamp}
+\item 
+\Hypertarget{main_8cpp_a893697b85f49be403fbd0531799a33aa}\label{main_8cpp_a893697b85f49be403fbd0531799a33aa} 
+String {\bfseries time\+Stamp}
+\item 
+\Hypertarget{main_8cpp_a7efa5e9c7494c7d4586359300221aa5d}\label{main_8cpp_a7efa5e9c7494c7d4586359300221aa5d} 
+const char \texorpdfstring{$\ast$}{*} {\bfseries filename} = "{}/data.\+csv"{}
+\item 
+\Hypertarget{main_8cpp_a454c4ab726de0051333b4a76033000cf}\label{main_8cpp_a454c4ab726de0051333b4a76033000cf} 
+const char \texorpdfstring{$\ast$}{*} {\bfseries PARAM\+\_\+\+INPUT\+\_\+1} = "{}ssid"{}
+\begin{DoxyCompactList}\small\item\em Search for parameter in HTTP POST request. \end{DoxyCompactList}\item 
+\Hypertarget{main_8cpp_a9051a630d6ada86bd19c8b2a81931a2d}\label{main_8cpp_a9051a630d6ada86bd19c8b2a81931a2d} 
+const char \texorpdfstring{$\ast$}{*} {\bfseries PARAM\+\_\+\+INPUT\+\_\+2} = "{}pass"{}
+\item 
+\Hypertarget{main_8cpp_a24784b86c62864e188063e8e26148d11}\label{main_8cpp_a24784b86c62864e188063e8e26148d11} 
+const char \texorpdfstring{$\ast$}{*} {\bfseries PARAM\+\_\+\+INPUT\+\_\+3} = "{}ip"{}
+\item 
+\Hypertarget{main_8cpp_aead3b22e22f932390dc3a71cd0562944}\label{main_8cpp_aead3b22e22f932390dc3a71cd0562944} 
+const char \texorpdfstring{$\ast$}{*} {\bfseries PARAM\+\_\+\+INPUT\+\_\+4} = "{}gateway"{}
+\item 
+\Hypertarget{main_8cpp_a9223d0e377e234d679946b194a81dcf3}\label{main_8cpp_a9223d0e377e234d679946b194a81dcf3} 
+String {\bfseries ssid}
+\begin{DoxyCompactList}\small\item\em Variables to save values from HTML form. \end{DoxyCompactList}\item 
+\Hypertarget{main_8cpp_a519725e0c97d7f502af54e1b185fbc09}\label{main_8cpp_a519725e0c97d7f502af54e1b185fbc09} 
+String {\bfseries pass}
+\item 
+\Hypertarget{main_8cpp_ac48f6ccb8e79c93e8c1d512be13826dd}\label{main_8cpp_ac48f6ccb8e79c93e8c1d512be13826dd} 
+String {\bfseries ip}
+\item 
+\Hypertarget{main_8cpp_abd1d7f174a4ef4b35ae6bb1bd36258bd}\label{main_8cpp_abd1d7f174a4ef4b35ae6bb1bd36258bd} 
+String {\bfseries gateway}
+\item 
+\Hypertarget{main_8cpp_af994acd89c43bc66aeb3fa5affb4c3e2}\label{main_8cpp_af994acd89c43bc66aeb3fa5affb4c3e2} 
+const char \texorpdfstring{$\ast$}{*} {\bfseries ssid\+Path} = "{}/ssid.\+txt"{}
+\begin{DoxyCompactList}\small\item\em File paths to save input values permanently. \end{DoxyCompactList}\item 
+\Hypertarget{main_8cpp_ac6262da0f52f5aa8accf052bf0081104}\label{main_8cpp_ac6262da0f52f5aa8accf052bf0081104} 
+const char \texorpdfstring{$\ast$}{*} {\bfseries pass\+Path} = "{}/pass.\+txt"{}
+\item 
+\Hypertarget{main_8cpp_a14f185ca928283b04850becc8a4ae72c}\label{main_8cpp_a14f185ca928283b04850becc8a4ae72c} 
+const char \texorpdfstring{$\ast$}{*} {\bfseries ip\+Path} = "{}/ip.\+txt"{}
+\item 
+\Hypertarget{main_8cpp_a78d0bd758ef93a5bb2a12320d8e4ea3b}\label{main_8cpp_a78d0bd758ef93a5bb2a12320d8e4ea3b} 
+const char \texorpdfstring{$\ast$}{*} {\bfseries gateway\+Path} = "{}/gateway.\+txt"{}
+\item 
+\Hypertarget{main_8cpp_afc89c17e0dad19618562037a5fee14d7}\label{main_8cpp_afc89c17e0dad19618562037a5fee14d7} 
+IPAddress {\bfseries local\+IP}
+\item 
+\Hypertarget{main_8cpp_ab2206d87f787590559a8b670f1db4a25}\label{main_8cpp_ab2206d87f787590559a8b670f1db4a25} 
+IPAddress {\bfseries local\+Gateway}
+\item 
+\Hypertarget{main_8cpp_a86027ad9c9159f02624d136fb63364fe}\label{main_8cpp_a86027ad9c9159f02624d136fb63364fe} 
+unsigned long {\bfseries previous\+Millis} = 0
+\begin{DoxyCompactList}\small\item\em Timer variables. \end{DoxyCompactList}\item 
+\Hypertarget{main_8cpp_afab23e0ee85e56261dace1dba900e39e}\label{main_8cpp_afab23e0ee85e56261dace1dba900e39e} 
+const long {\bfseries interval} = 10000
+\item 
+\Hypertarget{main_8cpp_a6556a3ddfe07b8a6c8e584e427084bf1}\label{main_8cpp_a6556a3ddfe07b8a6c8e584e427084bf1} 
+Device\+Address {\bfseries temperature\+Sensor} = \{0x28, 0x\+FF, 0x64, 0x1E, 0x30, 0x7B, 0x\+E2, 0x75\}
+\begin{DoxyCompactList}\small\item\em interval to wait for Wi-\/\+Fi connection (milliseconds) \end{DoxyCompactList}\item 
+\Hypertarget{main_8cpp_a9c880ea93dcaea64ba6380e40ed4a0e0}\label{main_8cpp_a9c880ea93dcaea64ba6380e40ed4a0e0} 
+JSONVar {\bfseries readings}
+\begin{DoxyCompactList}\small\item\em Json Variable to Hold Sensor Readings. \end{DoxyCompactList}\item 
+\Hypertarget{main_8cpp_a22cb446e5271d5d2c4b2e23792fb1966}\label{main_8cpp_a22cb446e5271d5d2c4b2e23792fb1966} 
+unsigned long {\bfseries last\+Time} = 0
+\begin{DoxyCompactList}\small\item\em Timer variables. \end{DoxyCompactList}\item 
+\Hypertarget{main_8cpp_a41ecd56d6560695e9f71ca55d0025734}\label{main_8cpp_a41ecd56d6560695e9f71ca55d0025734} 
+unsigned long {\bfseries timer\+Delay} = 10000
+\item 
+\Hypertarget{main_8cpp_a20cd826a70610a045e9118e9d7970275}\label{main_8cpp_a20cd826a70610a045e9118e9d7970275} 
+const int {\bfseries one\+Wire\+Bus} = 4
+\begin{DoxyCompactList}\small\item\em GPIO4 where the DS18\+B20 sensors are connected to. \end{DoxyCompactList}\item 
+\Hypertarget{main_8cpp_a18aa2e713b723d14e68fe9df63be78a3}\label{main_8cpp_a18aa2e713b723d14e68fe9df63be78a3} 
+Dallas\+Temperature sensors \& {\bfseries one\+Wire}
+\begin{DoxyCompactList}\small\item\em Pass our one\+Wire reference to Dallas Temperature sensor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Main entry point for the application. 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{main_8cpp_a22c708660ca240d82a93c9ab590d4410}\label{main_8cpp_a22c708660ca240d82a93c9ab590d4410} 
+\index{main.cpp@{main.cpp}!appendFile@{appendFile}}
+\index{appendFile@{appendFile}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{appendFile()}{appendFile()}}
+{\footnotesize\ttfamily void append\+File (\begin{DoxyParamCaption}\item[{fs\+::\+FS \&}]{fs,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{path,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{message }\end{DoxyParamCaption})}
+
+
+
+appends a file 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fs} & file system \\
+\hline
+{\em path} & \\
+\hline
+{\em message} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8cpp_a85ab8b6b61df960d00da9593c198bf76}\label{main_8cpp_a85ab8b6b61df960d00da9593c198bf76} 
+\index{main.cpp@{main.cpp}!getSensorReadings@{getSensorReadings}}
+\index{getSensorReadings@{getSensorReadings}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{getSensorReadings()}{getSensorReadings()}}
+{\footnotesize\ttfamily String get\+Sensor\+Readings (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+gets the sensor readings 
+
+\begin{DoxyReturn}{Returns}
+String with the sensor readings in json format 
+\end{DoxyReturn}
+\Hypertarget{main_8cpp_a8c42102313651a66a4bf03ef1157398b}\label{main_8cpp_a8c42102313651a66a4bf03ef1157398b} 
+\index{main.cpp@{main.cpp}!getTimeStamp@{getTimeStamp}}
+\index{getTimeStamp@{getTimeStamp}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{getTimeStamp()}{getTimeStamp()}}
+{\footnotesize\ttfamily void get\+Time\+Stamp (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+sets the date and time variables from the NTPClient for the data.\+csv file 
+
+The formatted\+Date comes with the following format\+: 2018-\/05-\/28T16\+:00\+:13Z We need to extract date and time
+
+Extract date
+
+Extract time\Hypertarget{main_8cpp_aaa64f44514c33d09845d1a61cfca3a27}\label{main_8cpp_aaa64f44514c33d09845d1a61cfca3a27} 
+\index{main.cpp@{main.cpp}!handleDownload@{handleDownload}}
+\index{handleDownload@{handleDownload}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{handleDownload()}{handleDownload()}}
+{\footnotesize\ttfamily void handle\+Download (\begin{DoxyParamCaption}\item[{Async\+Web\+Server\+Request \texorpdfstring{$\ast$}{*}}]{request }\end{DoxyParamCaption})}
+
+
+
+handles the download of the data.\+csv file 
+
+
+\begin{DoxyParams}{Parameters}
+{\em request} & \\
+\hline
+\end{DoxyParams}
+Handle the file download\Hypertarget{main_8cpp_a316f8f0c50a737823d2db28cf007be76}\label{main_8cpp_a316f8f0c50a737823d2db28cf007be76} 
+\index{main.cpp@{main.cpp}!initializeSDCard@{initializeSDCard}}
+\index{initializeSDCard@{initializeSDCard}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{initializeSDCard()}{initializeSDCard()}}
+{\footnotesize\ttfamily void initialize\+SDCard (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+initializes the SD card 
+
+Initialize SD card
+
+init failed
+
+If the data.\+txt file doesn\textquotesingle{}t exist Create a file on the SD card and write the data labels\Hypertarget{main_8cpp_a0e21e745f7111637149a98f1de4c8fdb}\label{main_8cpp_a0e21e745f7111637149a98f1de4c8fdb} 
+\index{main.cpp@{main.cpp}!initializeTimeClient@{initializeTimeClient}}
+\index{initializeTimeClient@{initializeTimeClient}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{initializeTimeClient()}{initializeTimeClient()}}
+{\footnotesize\ttfamily void initialize\+Time\+Client (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+initializes the NTPClient 
+
+Initialize a NTPClient to get time
+
+GMT +1 = 3600\Hypertarget{main_8cpp_ae3cd6362ffeb905d21037483b851e723}\label{main_8cpp_ae3cd6362ffeb905d21037483b851e723} 
+\index{main.cpp@{main.cpp}!initWiFi@{initWiFi}}
+\index{initWiFi@{initWiFi}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{initWiFi()}{initWiFi()}}
+{\footnotesize\ttfamily bool init\+Wi\+Fi (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+initializes the Wi-\/\+Fi connection 
+
+\begin{DoxyReturn}{Returns}
+true if Wi-\/\+Fi connection is successful 
+
+false if Wi-\/\+Fi connection is unsuccessful 
+\end{DoxyReturn}
+\Hypertarget{main_8cpp_afe461d27b9c48d5921c00d521181f12f}\label{main_8cpp_afe461d27b9c48d5921c00d521181f12f} 
+\index{main.cpp@{main.cpp}!loop@{loop}}
+\index{loop@{loop}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{loop()}{loop()}}
+{\footnotesize\ttfamily void loop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Send Events to the client with the Sensor Readings Every 10 seconds\Hypertarget{main_8cpp_a62f397dc6088ac03f320312b0d95b5a7}\label{main_8cpp_a62f397dc6088ac03f320312b0d95b5a7} 
+\index{main.cpp@{main.cpp}!readFile@{readFile}}
+\index{readFile@{readFile}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{readFile()}{readFile()}}
+{\footnotesize\ttfamily String read\+File (\begin{DoxyParamCaption}\item[{fs\+::\+FS \&}]{fs,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{path }\end{DoxyParamCaption})}
+
+
+
+reads a file from SPIFFS 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fs} & file system \\
+\hline
+{\em path} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+String 
+\end{DoxyReturn}
+\Hypertarget{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d}\label{main_8cpp_a4fc01d736fe50cf5b977f755b675f11d} 
+\index{main.cpp@{main.cpp}!setup@{setup}}
+\index{setup@{setup}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily void setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Serial port for debugging purposes
+
+Load values saved in SPIFFS
+
+Web Server Root URL
+
+Request for the latest sensor readings
+
+send event with message "{}hello!"{}, id current millis and set reconnect delay to 1 second
+
+Start server
+
+Connect to Wi-\/\+Fi network with SSID and password
+
+NULL sets an open Access Point
+
+Web Server Root URL
+
+HTTP POST ssid value
+
+Write file to save value
+
+HTTP POST pass value
+
+Write file to save value
+
+HTTP POST ip value
+
+Write file to save value
+
+HTTP POST gateway value
+
+Write file to save value
+
+Serial.\+printf("{}\+POST\mbox{[}\%s\mbox{]}\+: \%s\textbackslash{}n"{}, p-\/\texorpdfstring{$>$}{>}name().c\+\_\+str(), p-\/\texorpdfstring{$>$}{>}value().c\+\_\+str());\Hypertarget{main_8cpp_adfdfe491c3b951586aeba25a0b8ccf80}\label{main_8cpp_adfdfe491c3b951586aeba25a0b8ccf80} 
+\index{main.cpp@{main.cpp}!writeFile@{writeFile}}
+\index{writeFile@{writeFile}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{writeFile()}{writeFile()}}
+{\footnotesize\ttfamily void write\+File (\begin{DoxyParamCaption}\item[{fs\+::\+FS \&}]{fs,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{path,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{message }\end{DoxyParamCaption})}
+
+
+
+SPIFFS (SPI Flash File System) allows you to access the flash memory like you would do in a normal filesystem in your computer. 
+
+writes a file to SPIFFS
+
+Libraries for SD card JSON Library DS18\+B20 libraries Libraries to get time from NTP Server prototypes
+
+
+\begin{DoxyParams}{Parameters}
+{\em fs} & file system \\
+\hline
+{\em path} & \\
+\hline
+{\em message} & \\
+\hline
+\end{DoxyParams}
