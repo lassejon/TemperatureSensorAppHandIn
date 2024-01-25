@@ -58,6 +58,7 @@ void notifyClients(String sensorReadings)
   ws.textAll(sensorReadings);
 }
 
+/// Handle WebSocket event
 void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
 {
   AwsFrameInfo *info = (AwsFrameInfo *)arg;
@@ -68,6 +69,7 @@ void handleWebSocketMessage(void *arg, uint8_t *data, size_t len)
   }
 }
 
+/// Handle new WebSocket client connection
 void onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventType type, void *arg, uint8_t *data, size_t len)
 {
   switch (type)
@@ -89,8 +91,9 @@ void onEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventType 
 
 String dataMessage;
 
-/// Temperature Sensor variables
+/// Temperature Sensor variable
 float temperature;
+
 bool initWifi = false;
 
 /// Define NTP Client to get time
