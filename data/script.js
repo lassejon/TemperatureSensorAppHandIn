@@ -10,52 +10,22 @@ var chartT = new Highcharts.Chart({
     },
     series: [
         {
-            name: 'Temperature #1',
+            name: 'Temperature',
             type: 'line',
             color: '#101D42',
             marker: {
                 symbol: 'circle',
                 radius: 3,
-                fillColor: '#101D42',
-            }
-        },
-        {
-            name: 'Temperature #2',
-            type: 'line',
-            color: '#00A6A6',
-            marker: {
-                symbol: 'square',
-                radius: 3,
                 fillColor: '#00A6A6',
             }
-        },
-        {
-            name: 'Temperature #3',
-            type: 'line',
-            color: '#8B2635',
-            marker: {
-                symbol: 'triangle',
-                radius: 3,
-                fillColor: '#8B2635',
-            }
-        },
-        {
-            name: 'Temperature #4',
-            type: 'line',
-            color: '#71B48D',
-            marker: {
-                symbol: 'triangle-down',
-                radius: 3,
-                fillColor: '#71B48D',
-            }
-        },
+        }
     ],
     title: {
         text: undefined
     },
     xAxis: {
         type: 'datetime',
-        dateTimeLabelFormats: { second: '%H:%M:%S' }
+        dateTimeLabelFormats: { second: '%H:%M' }
     },
     yAxis: {
         title: {
@@ -129,3 +99,14 @@ if (!!window.EventSource) {
         plotTemperature(myObj);
     }, false);
 }
+
+
+document.getElementById('downloadButton').addEventListener('click', function () {
+    // Create a hidden iframe
+    var iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+
+    // Set the iframe source to trigger the download
+    iframe.src = '/download';
+});
